@@ -9,7 +9,7 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
 #Initializing client
-client = genai.client(api_key = api_key)
+client = genai.Client(api_key = api_key)
 
 #note generator
 def note_generate(images):

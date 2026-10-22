@@ -14,8 +14,9 @@ with st.sidebar:
         type=['jpg','jpeg','png'],
         accept_multiple_files=True
     )
+    pil_images = [Image.open(img) for img in images]
     #Images
-    if images:
+    if pil_images:
         if len(images) > 3:
             st.error("You can upload max 3 images")
         else:
@@ -45,14 +46,14 @@ if pressed:
         # Note
         with st.container(border=True):
             st.subheader("Your note:")
-            st.text("Note will be shown here")
+            st.markdown(note_generate(pil_images))
 
         #Audio
         with st.container(border=True):
             st.subheader("Audio Transcript:")
-            st.text(note_generate(images))
+            st.text("Audio will appear here")
 
         #Quiz
         with st.container(border=True):
-                    st.subheader(f"Quiz level: {selectDifficulty}")
-                    st.text("Note will be shown here")
+            st.subheader(f"Quiz level: {selectDifficulty}")
+            st.text("Note will be shown here")
