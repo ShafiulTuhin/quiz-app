@@ -1,6 +1,8 @@
 from google import genai
 from dotenv import load_dotenv
 import os
+from gtts import gTTS
+import io
 
 
 
@@ -11,7 +13,7 @@ api_key = os.getenv("GEMINI_API_KEY")
 #Initializing client
 client = genai.Client(api_key = api_key)
 
-#note generator
+#Note generator
 def note_generate(images):
     prompt = "Summarize the picture in note format at max 100 words, make sure to add necessary markdown to differentiate different section"
     response = client.models.generate_content(
@@ -19,3 +21,10 @@ def note_generate(images):
         contents = [images, prompt]
         )
     return response.text
+
+#Audio generator
+def audio_generator(text):
+    speech = gTTS(text,lang='en',slow=False)
+    audio_buffer = io.BytesIO()
+    speech.write_to_fp(audio_buffer)
+    return audio_buffer

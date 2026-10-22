@@ -1,7 +1,6 @@
 import streamlit as st
 from PIL import Image
-from api_calling import note_generate
-
+from api_calling import note_generate, audio_generator
 
 #Title
 st.title("Note Summary and Quiz Generator")
@@ -46,12 +45,15 @@ if pressed:
         # Note
         with st.container(border=True):
             st.subheader("Your note:")
-            st.markdown(note_generate(pil_images))
+            with st.spinner("AI generating notes..."):
+                generate_notes = note_generate(pil_images)
+                st.markdown(generate_notes)
 
         #Audio
         with st.container(border=True):
-            st.subheader("Audio Transcript:")
-            st.text("Audio will appear here")
+            st.subheader("Audio Transcription:")
+            with st.spinner("AI generating audio..."):
+                st.audio(audio_generator(generate_notes))            
 
         #Quiz
         with st.container(border=True):
