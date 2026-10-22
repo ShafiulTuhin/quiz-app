@@ -29,7 +29,12 @@ with st.sidebar:
                  ('Easy','Medium','Hard'),index=None)
     if selectDifficulty:
         st.markdown(f"Difficulty level: **{selectDifficulty}**")
-    else:
-        st.error("Please select difficulty level")
+ 
 
-    st.button("CLick the button to initiate AI", type="primary")
+    pressed = st.button("CLick the button to initiate AI", type="primary")
+
+if pressed:
+    if not images:
+        st.error("Please at least select 1 image")
+    if not selectDifficulty:
+        st.error("Please select difficulty level")
