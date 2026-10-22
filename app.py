@@ -1,4 +1,6 @@
 import streamlit as st
+from PIL import Image
+from api_calling import note_generate
 
 
 #Title
@@ -38,3 +40,19 @@ if pressed:
         st.error("Please at least select 1 image")
     if not selectDifficulty:
         st.error("Please select difficulty level")
+
+    if images and selectDifficulty:
+        # Note
+        with st.container(border=True):
+            st.subheader("Your note:")
+            st.text("Note will be shown here")
+
+        #Audio
+        with st.container(border=True):
+            st.subheader("Audio Transcript:")
+            st.text(note_generate(images))
+
+        #Quiz
+        with st.container(border=True):
+                    st.subheader(f"Quiz level: {selectDifficulty}")
+                    st.text("Note will be shown here")
